@@ -1,3 +1,3 @@
-# @lvce-editor/package-extensions
+# @lvce-editor/package-extension
 
-Utility package for packaging extensions into a tar.br file.
+Utility package for packaging an extension into a tar.br file.
