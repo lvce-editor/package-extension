@@ -3,12 +3,12 @@ import { join } from "node:path";
 
 export const package_ = async ({
   highestCompression = false,
-  cwd = process.cwd(),
+  inDir = process.cwd(),
+  outFile = join(inDir, "extension.tar.br"),
 } = {}) => {
-  const outFile = join(cwd, `extension.tar.br`);
   if (highestCompression) {
-    await Compress.compress(cwd, outFile);
+    await Compress.compress(inDir, outFile);
   } else {
-    await Compress.compressFasterButWithLowerCompression(cwd, outFile);
+    await Compress.compressFasterButWithLowerCompression(inDir, outFile);
   }
 };
