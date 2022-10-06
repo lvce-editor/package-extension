@@ -11,7 +11,11 @@ import { constants, createBrotliCompress } from 'node:zlib'
  */
 export const compress = async (inDir, outFile) => {
   await mkdir(dirname(outFile), { recursive: true })
-  await pipeline(tar.pack(inDir), createBrotliCompress(), createWriteStream(outFile))
+  await pipeline(
+    tar.pack(inDir),
+    createBrotliCompress(),
+    createWriteStream(outFile)
+  )
 }
 
 /**
@@ -31,6 +35,6 @@ export const compressFasterButWithLowerCompression = async (inDir, outFile) => {
         [constants.BROTLI_PARAM_QUALITY]: constants.BROTLI_MIN_QUALITY,
       },
     }),
-    createWriteStream(outFile),
+    createWriteStream(outFile)
   )
 }
