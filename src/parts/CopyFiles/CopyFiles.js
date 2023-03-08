@@ -15,6 +15,6 @@ export const copyFiles = async ({
     }
   } catch (error) {
     // @ts-ignore
-    throw new VError(error, `Failed to copy files`)
+    throw new VError(error, 'Failed to copy files')
   }
 }
