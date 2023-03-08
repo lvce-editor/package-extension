@@ -2,8 +2,8 @@ import { createWriteStream } from 'node:fs'
 import { mkdir } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { pipeline } from 'node:stream/promises'
-import tar from 'tar-fs'
 import { constants, createBrotliCompress } from 'node:zlib'
+import tar from 'tar-fs'
 
 /**
  * @param {string} inDir

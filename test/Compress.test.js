@@ -1,9 +1,9 @@
-import { mkdir, mkdtemp, readFile, writeFile } from 'fs/promises'
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { createReadStream } from 'node:fs'
 import { pipeline } from 'node:stream/promises'
 import { createBrotliDecompress } from 'node:zlib'
-import { tmpdir } from 'os'
-import { join } from 'path'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import tar from 'tar-fs'
 import * as Compress from '../src/parts/Compress/Compress.js'
 
@@ -31,7 +31,7 @@ test('compress', async () => {
   await writeFile(`${tmpDir}/abc.txt`, 'abc')
   await Compress.compress(tmpDir, `${tmpDir2}/result.tar.br`)
   await extract(`${tmpDir2}/result.tar.br`, tmpDir3)
-  expect(await readFile(`${tmpDir3}/abc.txt`, 'utf-8')).toBe('abc')
+  expect(await readFile(`${tmpDir3}/abc.txt`, 'utf8')).toBe('abc')
 })
 
 test('compressFasterButWithLowerCompression', async () => {
@@ -44,5 +44,5 @@ test('compressFasterButWithLowerCompression', async () => {
     `${tmpDir2}/result.tar.br`
   )
   await extract(`${tmpDir2}/result.tar.br`, tmpDir3)
-  expect(await readFile(`${tmpDir3}/abc.txt`, 'utf-8')).toBe('abc')
+  expect(await readFile(`${tmpDir3}/abc.txt`, 'utf8')).toBe('abc')
 })
