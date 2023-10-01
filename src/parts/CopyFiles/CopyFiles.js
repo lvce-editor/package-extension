@@ -1,6 +1,6 @@
 import { cp } from 'node:fs/promises'
 import { join } from 'node:path'
-import VError from 'verror'
+import { VError } from '@lvce-editor/verror'
 
 export const copyFiles = async ({
   root,
@@ -14,7 +14,6 @@ export const copyFiles = async ({
       await cp(from, to, { recursive: true })
     }
   } catch (error) {
-    // @ts-ignore
     throw new VError(error, 'Failed to copy files')
   }
 }
