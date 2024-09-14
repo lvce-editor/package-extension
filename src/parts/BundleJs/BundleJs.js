@@ -1,4 +1,4 @@
-export const bundleJs = async (input, outFile) => {
+export const bundleJs = async (input, outFile, sourceMap = true) => {
   const { babel } = await import('@rollup/plugin-babel')
   const { default: pluginTypeScript } = await import('@babel/preset-typescript')
   const { rollup } = await import('rollup')
@@ -21,7 +21,7 @@ export const bundleJs = async (input, outFile) => {
   await prettierWorkerOutput.write({
     file: outFile,
     format: 'es',
-    sourcemap: true,
+    sourcemap: sourceMap,
     sourcemapExcludeSources: true,
     inlineDynamicImports: true,
     freeze: false,
