@@ -2,8 +2,9 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
   const { babel } = await import('@rollup/plugin-babel')
   const { default: pluginTypeScript } = await import('@babel/preset-typescript')
   const { rollup } = await import('rollup')
+  const { nodeResolve } = await import('@rollup/plugin-node-resolve')
 
-  const prettierWorkerOutput = await rollup({
+  const workerOutput = await rollup({
     input,
     preserveEntrySignatures: 'strict',
     treeshake: {
@@ -15,10 +16,11 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
         presets: [pluginTypeScript],
       }),
+      nodeResolve(),
     ],
   })
 
-  await prettierWorkerOutput.write({
+  await workerOutput.write({
     file: outFile,
     format: 'es',
     sourcemap: sourceMap,
