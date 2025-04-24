@@ -24,7 +24,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "execa": "^9.5.2",
-    "rollup": "^4.39.0",
+    "rollup": "^4.40.0",
     "tar-fs": "^3.0.8"
   },
   "prettier": {
