@@ -16,7 +16,7 @@
     "@types/tar-fs": "^2.0.4",
     "jest": "^30.0.5",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.27.1",
@@ -24,7 +24,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "execa": "^9.6.0",
-    "rollup": "^4.46.2",
+    "rollup": "^4.48.0",
     "tar-fs": "^3.1.0"
   },
   "prettier": {
