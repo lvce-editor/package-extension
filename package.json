@@ -4,6 +4,10 @@
   "description": "",
   "main": "src/main.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lvce-editor/package-extension.git"
+  },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
