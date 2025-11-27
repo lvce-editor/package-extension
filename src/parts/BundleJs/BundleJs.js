@@ -4,6 +4,7 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
   const { rollup } = await import('rollup')
   const { nodeResolve } = await import('@rollup/plugin-node-resolve')
   const { default: commonJs } = await import('@rollup/plugin-commonjs')
+  const { default: json } = await import('@rollup/plugin-json')
 
   const workerOutput = await rollup({
     input,
@@ -19,6 +20,7 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
       }),
       nodeResolve(),
       commonJs(),
+      json(),
     ],
   })
 
