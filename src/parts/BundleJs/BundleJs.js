@@ -3,7 +3,7 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
   const { default: pluginTypeScript } = await import('@babel/preset-typescript')
   const { rollup } = await import('rollup')
   const { nodeResolve } = await import('@rollup/plugin-node-resolve')
-  const commonJs = await import('@rollup/plugin-commonjs')
+  const { default: commonJs } = await import('@rollup/plugin-commonjs')
 
   const workerOutput = await rollup({
     input,
@@ -18,7 +18,7 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
         presets: [pluginTypeScript],
       }),
       nodeResolve(),
-      commonJs()
+      commonJs(),
     ],
   })
 
