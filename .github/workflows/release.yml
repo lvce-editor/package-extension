@@ -33,6 +33,7 @@ jobs:
         with:
           tag_name: ${{ env.RG_VERSION }}
           release_name: ${{ env.RG_VERSION }}
+          draft: true
 
   build-release:
     name: build-release
@@ -60,3 +61,9 @@ jobs:
         working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.create-release.outputs.rg_version }}"
+          gh release edit $VERSION --draft=false
