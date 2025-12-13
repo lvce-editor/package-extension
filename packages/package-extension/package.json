@@ -1,14 +1,11 @@
 {
   "name": "@lvce-editor/package-extension",
   "version": "0.0.0-dev",
-  "description": "",
-  "keywords": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lvce-editor/package-extension.git"
   },
   "license": "MIT",
-  "author": "",
   "type": "module",
   "main": "src/main.js",
   "scripts": {
