@@ -10,13 +10,6 @@ export const packageExtension = async ({
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
-<<<<<<< HEAD
-  writeVersionFromGitTag = false,
-}: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
-  if (writeVersionFromGitTag) {
-    const extensionJsonPath = join(inDir, 'extension.json')
-    const version = await getVersion(env)
-=======
   writeLastUpdatedFromGitCommit = false,
   writeVersionFromGitTag = false,
 }: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
@@ -24,7 +17,6 @@ export const packageExtension = async ({
   let extensionJson: Record<string, unknown> | null = null
 
   if (writeVersionFromGitTag || writeLastUpdatedFromGitCommit) {
->>>>>>> origin/main
     const extensionJsonContent = await readFile(extensionJsonPath, 'utf8')
     extensionJson = JSON.parse(extensionJsonContent)
   }
