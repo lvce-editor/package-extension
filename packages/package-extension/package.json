@@ -6,6 +6,7 @@
     "url": "git+https://github.com/lvce-editor/package-extension.git"
   },
   "license": "MIT",
+  "author": "Lvce Editor",
   "type": "module",
   "main": "src/main.ts",
   "types": "src/main.d.ts",
