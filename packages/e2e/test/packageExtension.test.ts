@@ -13,9 +13,9 @@ test('packageExtension creates tar.br file with correct contents', async () => {
   const outFile = join(outputDir, 'extension.tar.br')
 
   const extensionJson = {
+    description: 'Test extension',
     name: 'test-extension',
     version: '1.0.0',
-    description: 'Test extension',
   }
 
   await writeFile(
@@ -30,10 +30,10 @@ test('packageExtension creates tar.br file with correct contents', async () => {
   )
 
   await packageExtension({
+    highestCompression: false,
     inDir: extensionDir,
     outFile,
     writeVersionFromGitTag: false,
-    highestCompression: false,
   })
 
   const stats = await stat(outFile)

@@ -24,10 +24,10 @@ test('packageExtension with highestCompression creates valid tar.br file', async
   await writeFile(join(extensionDir, 'file.txt'), 'test content\n')
 
   await packageExtension({
+    highestCompression: true,
     inDir: extensionDir,
     outFile,
     writeVersionFromGitTag: false,
-    highestCompression: true,
   })
 
   const stats = await stat(outFile)
