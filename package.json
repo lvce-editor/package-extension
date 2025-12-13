@@ -11,11 +11,11 @@
   "main": "src/main.js",
   "scripts": {
     "build": "node scripts/build.js",
+    "format": "prettier --write .",
     "postinstall": "lerna bootstrap --ci",
     "lint": "eslint . && prettier --check .",
     "measure": "cd packages/memory && npm run measure",
     "test": "lerna run test",
-    "format": "prettier --write .",
     "type-check": "tsc -b"
   },
   "prettier": {
