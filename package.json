@@ -2,41 +2,18 @@
   "name": "@lvce-editor/package-extension",
   "version": "0.0.0-dev",
   "description": "",
-  "main": "src/main.js",
-  "type": "module",
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lvce-editor/package-extension.git"
   },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "src/main.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/tar-fs": "^2.0.4",
-    "jest": "^30.2.0",
-    "lerna": "^9.0.3",
-    "prettier": "^3.7.4",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@babel/preset-typescript": "^7.28.5",
-    "@lvce-editor/verror": "^1.7.0",
-    "@rollup/plugin-babel": "^6.1.0",
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "execa": "^9.6.1",
-    "rollup": "^4.53.3",
-    "tar-fs": "^3.1.1"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
   },
   "xo": {
     "rules": {
@@ -77,5 +54,30 @@
     "ignores": [
       "distmin"
     ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.28.5",
+    "@lvce-editor/verror": "^1.7.0",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "execa": "^9.6.1",
+    "rollup": "^4.53.3",
+    "tar-fs": "^3.1.1"
+  },
+  "devDependencies": {
+    "@lvce-editor/eslint-config": "^3.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/tar-fs": "^2.0.4",
+    "eslint": "^9.39.2",
+    "jest": "^30.2.0",
+    "lerna": "^9.0.3",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3"
   }
 }
