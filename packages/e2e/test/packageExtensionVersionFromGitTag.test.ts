@@ -19,28 +19,19 @@ test('packageExtension adds version from git tag to extension.json', async () =>
     JSON.stringify(originalExtensionJson, null, 2) + '\n',
   )
 
-  const originalEnv = process.env.GIT_TAG
-  try {
-    process.env.GIT_TAG = 'v2.3.4'
-    await packageExtension({
-      highestCompression: false,
-      inDir: extensionDir,
-      writeVersionFromGitTag: true,
-    })
+  await packageExtension({
+    env: { ...process.env, GIT_TAG: 'v2.3.4' },
+    highestCompression: false,
+    inDir: extensionDir,
+    writeVersionFromGitTag: true,
+  })
 
-    const updatedExtensionJson = JSON.parse(
-      await readFile(extensionJsonPath, 'utf8'),
-    )
-    expect(updatedExtensionJson.name).toBe('test-extension')
-    expect(updatedExtensionJson.description).toBe('Test extension')
-    expect(updatedExtensionJson.version).toBe('2.3.4')
-  } finally {
-    if (originalEnv === undefined) {
-      delete process.env.GIT_TAG
-    } else {
-      process.env.GIT_TAG = originalEnv
-    }
-  }
+  const updatedExtensionJson = JSON.parse(
+    await readFile(extensionJsonPath, 'utf8'),
+  )
+  expect(updatedExtensionJson.name).toBe('test-extension')
+  expect(updatedExtensionJson.description).toBe('Test extension')
+  expect(updatedExtensionJson.version).toBe('2.3.4')
 })
 
 test('packageExtension adds version from git tag without v prefix to extension.json', async () => {
@@ -58,25 +49,16 @@ test('packageExtension adds version from git tag without v prefix to extension.j
     JSON.stringify(originalExtensionJson, null, 2) + '\n',
   )
 
-  const originalEnv = process.env.GIT_TAG
-  try {
-    process.env.GIT_TAG = '3.5.6'
-    await packageExtension({
-      highestCompression: false,
-      inDir: extensionDir,
-      writeVersionFromGitTag: true,
-    })
+  await packageExtension({
+    env: { ...process.env, GIT_TAG: '3.5.6' },
+    highestCompression: false,
+    inDir: extensionDir,
+    writeVersionFromGitTag: true,
+  })
 
-    const updatedExtensionJson = JSON.parse(
-      await readFile(extensionJsonPath, 'utf8'),
-    )
-    expect(updatedExtensionJson.name).toBe('test-extension')
-    expect(updatedExtensionJson.version).toBe('3.5.6')
-  } finally {
-    if (originalEnv === undefined) {
-      delete process.env.GIT_TAG
-    } else {
-      process.env.GIT_TAG = originalEnv
-    }
-  }
+  const updatedExtensionJson = JSON.parse(
+    await readFile(extensionJsonPath, 'utf8'),
+  )
+  expect(updatedExtensionJson.name).toBe('test-extension')
+  expect(updatedExtensionJson.version).toBe('3.5.6')
 })
