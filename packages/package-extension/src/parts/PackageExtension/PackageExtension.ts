@@ -10,8 +10,8 @@ export const packageExtension = async ({
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
-  writeLastUpdatedFromGitCommit = false,
-  writeVersionFromGitTag = false,
+  writeLastUpdatedFromGitCommit = true,
+  writeVersionFromGitTag = true,
 }: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
   const extensionJsonPath = join(inDir, 'extension.json')
   let extensionJson: Record<string, unknown> | null = null
