@@ -52,7 +52,9 @@ export const computeHash = (contents: readonly string[] | string): string => {
   return hash.digest('hex')
 }
 
-const computeCacheKey = async (locations: readonly string[]): Promise<string> => {
+const computeCacheKey = async (
+  locations: readonly string[],
+): Promise<string> => {
   const absolutePaths = locations.map(getAbsolutePath)
   const contents = await Promise.all(absolutePaths.map(getContent))
   const hash = computeHash(contents)

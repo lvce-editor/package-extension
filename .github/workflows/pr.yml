@@ -1,13 +1,14 @@
-name: CI
+name: PR
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  ci:
+  pr:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-24.04, macos-15, windows-2025]
     runs-on: ${{ matrix.os }}
