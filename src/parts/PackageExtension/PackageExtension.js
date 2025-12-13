@@ -6,5 +6,9 @@ export const packageExtension = async ({
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
 } = {}) => {
-  await (highestCompression ? Compress.compress(inDir, outFile) : Compress.compressFasterButWithLowerCompression(inDir, outFile));
+  if (highestCompression) {
+    await Compress.compress(inDir, outFile)
+  } else {
+    await Compress.compressFasterButWithLowerCompression(inDir, outFile)
+  }
 }
