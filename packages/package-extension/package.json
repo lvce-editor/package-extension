@@ -30,7 +30,7 @@
       ]
     },
     "testMatch": [
-      "test/**"
+      "<rootDir>/test/**"
     ],
     "collectCoverage": true,
     "coverageThreshold": {
