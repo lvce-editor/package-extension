@@ -42,14 +42,14 @@ const copyPackageJson = () => {
 }
 
 const buildTypeScript = () => {
-  execSync('npx tsc -b', {
+  execSync('npx tsc -b tsconfig.build.json', {
     cwd: packagePath,
     stdio: 'inherit',
   })
 }
 
 const copyFiles = () => {
-  cpSync(join(packagePath, 'dist'), join(root, 'dist'), {
+  cpSync(join(packagePath, 'dist', 'src'), join(root, 'dist', 'src'), {
     recursive: true,
     force: true,
   })
@@ -62,8 +62,8 @@ const copyFiles = () => {
 const main = () => {
   createDist()
   buildTypeScript()
-  copyPackageJson()
   copyFiles()
+  copyPackageJson()
 }
 
 main()
