@@ -13,8 +13,10 @@
   "main": "src/main.js",
   "scripts": {
     "build": "node scripts/build.js",
+    "lint": "eslint . && prettier --check .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "postinstall": "lerna bootstrap --ci"
   },
   "xo": {
     "rules": {
@@ -77,8 +79,9 @@
     "@types/tar-fs": "^2.0.4",
     "eslint": "^9.39.2",
     "jest": "^30.2.0",
-    "lerna": "^9.0.3",
+    "lerna": "^8.2.4",
     "prettier": "^3.7.4",
+    "@lerna/legacy-package-management": "^8.2.4",
     "typescript": "^5.9.3"
   }
 }

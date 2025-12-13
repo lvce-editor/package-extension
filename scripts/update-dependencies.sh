@@ -28,7 +28,9 @@ function updateDependencies {
   fi
 }
 
-                                                       updateDependencies             &&
+                                                  updateDependencies             &&
+cd packages/build                                   && updateDependencies && cd ../.. &&
+cd packages/memory                                  && updateDependencies && cd ../.. &&
 
 echo "Great Success!"
 
