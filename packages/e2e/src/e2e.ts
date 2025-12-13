@@ -1,4 +1,4 @@
-const main = async () => {
+const main = async (): Promise<void> => {
   // TODO run the package scripts with various fixtures
   // verify the build works and
   // helpful error messages are displayed when options are invalid
