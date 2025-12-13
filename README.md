@@ -23,7 +23,3 @@ await packageExtension({
   outFile: join(root, 'extension.tar.br'),
 })
 ```
-
-## Gitpod
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/lvce-editor/package-extension)
