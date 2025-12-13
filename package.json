@@ -12,6 +12,7 @@
   "type": "module",
   "main": "src/main.js",
   "scripts": {
+    "type-check": "tsc -b",
     "build": "node scripts/build.js",
     "lint": "eslint . && prettier --check .",
     "test": "lerna run test",
