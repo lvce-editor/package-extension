@@ -43,4 +43,3 @@ test('compressFasterButWithLowerCompression', async () => {
   await extract(`${tmpDir2}/result.tar.br`, tmpDir3)
   expect(await readFile(`${tmpDir3}/abc.txt`, 'utf8')).toBe('abc')
 })
-

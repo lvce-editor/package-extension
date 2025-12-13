@@ -13,4 +13,3 @@ export const replace = async ({
   const newContent = oldContent.replace(occurrence, replacement)
   await writeFile(path, newContent)
 }
-

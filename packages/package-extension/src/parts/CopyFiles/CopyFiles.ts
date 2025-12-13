@@ -21,4 +21,3 @@ export const copyFiles = async ({
     throw new VError(error, 'Failed to copy files')
   }
 }
-

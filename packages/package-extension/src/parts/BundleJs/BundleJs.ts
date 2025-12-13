@@ -7,8 +7,10 @@ export const bundleJs = async (
   const { default: pluginTypeScript } = await import('@babel/preset-typescript')
   const { rollup } = await import('rollup')
   const { nodeResolve } = await import('@rollup/plugin-node-resolve')
-  const { default: commonJs } = await import('@rollup/plugin-commonjs')
-  const { default: json } = await import('@rollup/plugin-json')
+  const commonJsModule = await import('@rollup/plugin-commonjs')
+  const jsonModule = await import('@rollup/plugin-json')
+  const commonJs = commonJsModule.default as unknown as (...args: any[]) => any
+  const json = jsonModule.default as unknown as (...args: any[]) => any
 
   const workerOutput = await rollup({
     input,
@@ -43,4 +45,3 @@ export const bundleJs = async (
     hoistTransitiveImports: false,
   })
 }
-

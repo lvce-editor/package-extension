@@ -25,4 +25,3 @@ export const addPlaygroundFiles = async ({
     JSON.stringify(fileMap, null, 2) + '\n',
   )
 }
-

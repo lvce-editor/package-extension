@@ -33,4 +33,3 @@ export const compressFasterButWithLowerCompression = async (
     createWriteStream(outFile),
   )
 }
-

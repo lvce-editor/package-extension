@@ -16,4 +16,3 @@ export const packageExtension = async ({
     await Compress.compressFasterButWithLowerCompression(inDir, outFile)
   }
 }
-

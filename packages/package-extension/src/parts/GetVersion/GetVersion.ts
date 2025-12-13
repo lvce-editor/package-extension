@@ -40,4 +40,3 @@ export const getVersion = async (): Promise<string> => {
   }
   return getGitTagFromGit()
 }
-

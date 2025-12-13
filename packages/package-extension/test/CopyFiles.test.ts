@@ -18,4 +18,3 @@ test('copyFiles', async () => {
   })
   expect(await readFile(join(root, 'dist', 'a.txt'), 'utf8')).toBe('a')
 })
-
