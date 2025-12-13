@@ -5,11 +5,11 @@ import * as Compress from '../Compress/Compress.ts'
 import { getVersion } from '../GetVersion/GetVersion.ts'
 
 export const packageExtension = async ({
+  env = process.env,
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
   writeVersionFromGitTag = false,
-  env = process.env,
 }: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
   if (writeVersionFromGitTag) {
     const extensionJsonPath = join(inDir, 'extension.json')
