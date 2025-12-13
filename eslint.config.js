@@ -5,7 +5,6 @@ export default [
   ...config.default,
   ...config.recommendedNode,
   ...actions,
-  // ...config
   {
     rules: {
       'github-actions/permissions': 'off',
