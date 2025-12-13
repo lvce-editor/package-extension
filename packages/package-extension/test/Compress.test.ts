@@ -1,22 +1,18 @@
-import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises'
+import { test, expect } from '@jest/globals'
 import { createReadStream } from 'node:fs'
-import { pipeline } from 'node:stream/promises'
-import { createBrotliDecompress } from 'node:zlib'
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { pipeline } from 'node:stream/promises'
+import { createBrotliDecompress } from 'node:zlib'
 import tar from 'tar-fs'
 import * as Compress from '../src/parts/Compress/Compress.js'
-import { test, expect } from '@jest/globals'
 
-const getTmpDir = () => {
+const getTmpDir = (): Promise<string> => {
   return mkdtemp(join(tmpdir(), 'foo-'))
 }
 
-/**
- * @param {string} inFile
- * @param {string} outDir
- */
-export const extract = async (inFile, outDir) => {
+const extract = async (inFile: string, outDir: string): Promise<void> => {
   await mkdir(outDir, { recursive: true })
   await pipeline(
     createReadStream(inFile),
