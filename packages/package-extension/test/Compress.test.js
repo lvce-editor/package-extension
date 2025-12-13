@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import tar from 'tar-fs'
 import * as Compress from '../src/parts/Compress/Compress.js'
+import { test, expect } from '@jest/globals'
 
 const getTmpDir = () => {
   return mkdtemp(join(tmpdir(), 'foo-'))
@@ -20,7 +21,7 @@ export const extract = async (inFile, outDir) => {
   await pipeline(
     createReadStream(inFile),
     createBrotliDecompress(),
-    tar.extract(outDir)
+    tar.extract(outDir),
   )
 }
 
@@ -41,7 +42,7 @@ test('compressFasterButWithLowerCompression', async () => {
   await writeFile(`${tmpDir}/abc.txt`, 'abc')
   await Compress.compressFasterButWithLowerCompression(
     tmpDir,
-    `${tmpDir2}/result.tar.br`
+    `${tmpDir2}/result.tar.br`,
   )
   await extract(`${tmpDir2}/result.tar.br`, tmpDir3)
   expect(await readFile(`${tmpDir3}/abc.txt`, 'utf8')).toBe('abc')
