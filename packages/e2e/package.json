@@ -1,6 +1,10 @@
 {
   "name": "@lvce-editor/e2e",
   "version": "0.0.0-dev",
+<<<<<<< HEAD
+=======
+  "license": "MIT",
+>>>>>>> origin/main
   "type": "module",
   "scripts": {
     "measure": "node --experimental-strip-types src/measureMemory.ts",
