@@ -3,5 +3,6 @@ export interface PackageExtensionOptions {
   readonly highestCompression?: boolean
   readonly inDir?: string
   readonly outFile?: string
+  readonly writeLastUpdatedFromGitCommit?: boolean
   readonly writeVersionFromGitTag?: boolean
 }
