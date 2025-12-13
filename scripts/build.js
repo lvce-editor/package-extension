@@ -5,14 +5,20 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
-const packagePath = root
+const packagePath = join(root, 'packages', 'package-extension')
 
 const getVersion = () => {
-  const stdout = execSync('git describe --exact-match --tags').toString().trim()
-  if (stdout.startsWith('v')) {
-    return stdout.slice(1)
+  try {
+    const stdout = execSync('git describe --exact-match --tags')
+      .toString()
+      .trim()
+    if (stdout.startsWith('v')) {
+      return stdout.slice(1)
+    }
+    return stdout
+  } catch {
+    return '0.0.0-dev'
   }
-  return stdout
 }
 
 const createDist = () => {
@@ -21,7 +27,7 @@ const createDist = () => {
 
 const copyPackageJson = () => {
   const packageJson = JSON.parse(
-    readFileSync(join(packagePath, 'package.json'), 'utf8')
+    readFileSync(join(packagePath, 'package.json'), 'utf8'),
   )
   packageJson.version = getVersion()
   delete packageJson.scripts
@@ -30,7 +36,7 @@ const copyPackageJson = () => {
 
   writeFileSync(
     join(root, 'dist', 'package.json'),
-    JSON.stringify(packageJson, null, 2) + '\n'
+    JSON.stringify(packageJson, null, 2) + '\n',
   )
 }
 
