@@ -1,12 +1,14 @@
 import { execa } from 'execa'
 
-const getGitCommitDateFromGit = async (cwd: string): Promise<number | null> => {
+const getGitCommitDateFromGit = async (
+  cwd: string,
+): Promise<number | null> => {
   const { exitCode, stdout } = await execa(
     'git',
     ['log', '-1', '--format=%cd', '--date=format:%Y%m%d%H%M%S'],
     {
-      cwd,
       reject: false,
+      cwd,
     },
   )
   if (exitCode) {
@@ -17,12 +19,12 @@ const getGitCommitDateFromGit = async (cwd: string): Promise<number | null> => {
   }
   const dateString = stdout.trim()
   // Parse YYYYMMDDHHMMSS format
-  const year = Number.parseInt(dateString.slice(0, 4), 10)
-  const month = Number.parseInt(dateString.slice(4, 6), 10) - 1 // Month is 0-indexed
-  const day = Number.parseInt(dateString.slice(6, 8), 10)
-  const hour = Number.parseInt(dateString.slice(8, 10), 10)
-  const minute = Number.parseInt(dateString.slice(10, 12), 10)
-  const second = Number.parseInt(dateString.slice(12, 14), 10)
+  const year = parseInt(dateString.slice(0, 4), 10)
+  const month = parseInt(dateString.slice(4, 6), 10) - 1 // Month is 0-indexed
+  const day = parseInt(dateString.slice(6, 8), 10)
+  const hour = parseInt(dateString.slice(8, 10), 10)
+  const minute = parseInt(dateString.slice(10, 12), 10)
+  const second = parseInt(dateString.slice(12, 14), 10)
   const date = new Date(year, month, day, hour, minute, second)
   return Math.floor(date.getTime() / 1000) // Convert to unix timestamp (seconds)
 }
@@ -33,8 +35,8 @@ export const getLastUpdatedDate = async (
 ): Promise<number | null> => {
   const { GIT_COMMIT_DATE } = env
   if (GIT_COMMIT_DATE) {
-    const timestamp = Number.parseInt(GIT_COMMIT_DATE, 10)
-    if (!isNaN(timestamp)) {
+    const timestamp = parseInt(GIT_COMMIT_DATE, 10)
+    if (!Number.isNaN(timestamp)) {
       return timestamp
     }
   }
