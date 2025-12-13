@@ -5,11 +5,11 @@ export const addPlaygroundFiles = async ({
   commitHash,
   filesPath,
   root,
-}: {
+}: Readonly<{
   root: string
   commitHash: string
   filesPath: string
-}) => {
+}>): Promise<void> => {
   await rm(join(root, 'dist', commitHash, 'playground'), {
     force: true,
     recursive: true,

@@ -5,11 +5,11 @@ export const packageExtension = async ({
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
-}: {
+}: Readonly<{
   highestCompression?: boolean
   inDir?: string
   outFile?: string
-} = {}) => {
+}> = {}): Promise<void> => {
   if (highestCompression) {
     await Compress.compress(inDir, outFile)
   } else {

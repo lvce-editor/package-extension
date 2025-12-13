@@ -6,11 +6,11 @@ export const copyFiles = async ({
   files,
   root,
   outDir = join(root, 'dist'),
-}: {
+}: Readonly<{
   root: string
-  files: string[]
+  files: readonly string[]
   outDir?: string
-}) => {
+}>): Promise<void> => {
   try {
     for (const file of files) {
       const from = join(root, file)

@@ -5,7 +5,10 @@ import { pipeline } from 'node:stream/promises'
 import { constants, createBrotliCompress } from 'node:zlib'
 import tar from 'tar-fs'
 
-export const compress = async (inDir: string, outFile: string) => {
+export const compress = async (
+  inDir: string,
+  outFile: string,
+): Promise<void> => {
   await mkdir(dirname(outFile), { recursive: true })
   await pipeline(
     tar.pack(inDir),
@@ -17,7 +20,7 @@ export const compress = async (inDir: string, outFile: string) => {
 export const compressFasterButWithLowerCompression = async (
   inDir: string,
   outFile: string,
-) => {
+): Promise<void> => {
   await mkdir(dirname(outFile), { recursive: true })
   await pipeline(
     tar.pack(inDir, {

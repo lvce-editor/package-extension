@@ -8,11 +8,11 @@ import { createBrotliDecompress } from 'node:zlib'
 import tar from 'tar-fs'
 import * as Compress from '../src/parts/Compress/Compress.js'
 
-const getTmpDir = () => {
+const getTmpDir = (): Promise<string> => {
   return mkdtemp(join(tmpdir(), 'foo-'))
 }
 
-export const extract = async (inFile: string, outDir: string) => {
+const extract = async (inFile: string, outDir: string): Promise<void> => {
   await mkdir(outDir, { recursive: true })
   await pipeline(
     createReadStream(inFile),

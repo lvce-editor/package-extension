@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import * as CopyFiles from '../src/parts/CopyFiles/CopyFiles.js'
 
-const getTmpDir = () => {
+const getTmpDir = (): Promise<string> => {
   return mkdtemp(join(tmpdir(), 'foo-'))
 }
 
