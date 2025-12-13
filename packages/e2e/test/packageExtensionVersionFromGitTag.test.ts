@@ -10,8 +10,8 @@ test('packageExtension adds version from git tag to extension.json', async () =>
   const extensionJsonPath = join(extensionDir, 'extension.json')
 
   const originalExtensionJson = {
-    name: 'test-extension',
     description: 'Test extension',
+    name: 'test-extension',
   }
 
   await writeFile(
@@ -23,9 +23,9 @@ test('packageExtension adds version from git tag to extension.json', async () =>
   try {
     process.env.GIT_TAG = 'v2.3.4'
     await packageExtension({
+      highestCompression: false,
       inDir: extensionDir,
       writeVersionFromGitTag: true,
-      highestCompression: false,
     })
 
     const updatedExtensionJson = JSON.parse(
@@ -35,10 +35,10 @@ test('packageExtension adds version from git tag to extension.json', async () =>
     expect(updatedExtensionJson.description).toBe('Test extension')
     expect(updatedExtensionJson.version).toBe('2.3.4')
   } finally {
-    if (originalEnv !== undefined) {
-      process.env.GIT_TAG = originalEnv
-    } else {
+    if (originalEnv === undefined) {
       delete process.env.GIT_TAG
+    } else {
+      process.env.GIT_TAG = originalEnv
     }
   }
 })
@@ -62,9 +62,9 @@ test('packageExtension adds version from git tag without v prefix to extension.j
   try {
     process.env.GIT_TAG = '3.5.6'
     await packageExtension({
+      highestCompression: false,
       inDir: extensionDir,
       writeVersionFromGitTag: true,
-      highestCompression: false,
     })
 
     const updatedExtensionJson = JSON.parse(
@@ -73,10 +73,10 @@ test('packageExtension adds version from git tag without v prefix to extension.j
     expect(updatedExtensionJson.name).toBe('test-extension')
     expect(updatedExtensionJson.version).toBe('3.5.6')
   } finally {
-    if (originalEnv !== undefined) {
-      process.env.GIT_TAG = originalEnv
-    } else {
+    if (originalEnv === undefined) {
       delete process.env.GIT_TAG
+    } else {
+      process.env.GIT_TAG = originalEnv
     }
   }
 })
