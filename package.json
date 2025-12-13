@@ -1,5 +1,5 @@
 {
-  "name": "@lvce-editor/package-extension",
+  "name": "@lvce-editor/package-extension-monorepo",
   "version": "0.0.0-dev",
   "description": "",
   "keywords": [],
@@ -14,69 +14,17 @@
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "eslint . && prettier --check .",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "postinstall": "lerna bootstrap --ci"
-  },
-  "xo": {
-    "rules": {
-      "unicorn/filename-case": "off",
-      "indent": "off",
-      "semi": "off",
-      "no-unused-vars": "off",
-      "unicorn/numeric-separators-style": "off",
-      "no-extra-semi": "off",
-      "arrow-body-style": "off",
-      "padded-blocks": "off",
-      "capitalized-comments": "off",
-      "padding-line-between-statements": "off",
-      "arrow-parens": "off",
-      "no-warning-comments": "off",
-      "array-bracket-spacing": "off",
-      "comma-spacing": "off",
-      "unicorn/no-array-callback-reference": "off",
-      "comma-dangle": "off",
-      "operator-linebreak": "off",
-      "no-case-declarations": "off",
-      "no-undef": "off",
-      "object-curly-spacing": "off",
-      "object-shorthand": "off",
-      "complexity": "off",
-      "no-labels": "off",
-      "no-multi-assign": "off",
-      "max-params": "off",
-      "no-bitwise": "off",
-      "unicorn/prefer-math-trunc": "off",
-      "no-await-in-loop": "off",
-      "unicorn/prefer-add-event-listener": "off",
-      "no-unused-expressions": "off",
-      "unicorn/better-regex": "off",
-      "unicorn/no-array-push-push": "off",
-      "unicorn/prevent-abbreviations": "off"
-    },
-    "ignores": [
-      "distmin"
-    ]
+    "test": "lerna run test",
+    "postinstall": "lerna bootstrap --ci",
+    "measure": "cd packages/memory && npm run measure"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true
   },
-  "dependencies": {
-    "@babel/preset-typescript": "^7.28.5",
-    "@lvce-editor/verror": "^1.7.0",
-    "@rollup/plugin-babel": "^6.1.0",
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "execa": "^9.6.1",
-    "rollup": "^4.53.3",
-    "tar-fs": "^3.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@lvce-editor/eslint-config": "^3.1.0",
-    "@types/jest": "^30.0.0",
-    "@types/tar-fs": "^2.0.4",
     "eslint": "^9.39.2",
     "jest": "^30.2.0",
     "lerna": "^8.2.4",

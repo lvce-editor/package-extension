@@ -1,19 +1,15 @@
 {
-  "compilerOptions": {
-    "lib": ["esnext"],
-    "target": "esnext",
-    "checkJs": true,
-    "module": "esnext",
-    "types": ["node", "jest"],
-    "moduleResolution": "node",
-    "isolatedModules": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "rootDir": ".",
-    "noEmit": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
-  },
-  "include": ["src", "test"]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./packages/package-extension"
+    },
+    {
+      "path": "./packages/build"
+    },
+    {
+      "path": "./packages/memory"
+    }
+  ]
 }
