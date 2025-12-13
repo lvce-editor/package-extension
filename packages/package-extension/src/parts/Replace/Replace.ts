@@ -1,8 +1,8 @@
 import { readFile, writeFile } from 'node:fs/promises'
 
 export const replace = async ({
-  path,
   occurrence,
+  path,
   replacement,
 }: {
   path: string

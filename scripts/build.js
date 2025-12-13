@@ -30,6 +30,7 @@ const copyPackageJson = () => {
     readFileSync(join(packagePath, 'package.json'), 'utf8'),
   )
   packageJson.version = getVersion()
+  packageJson.main = 'src/main.js'
   delete packageJson.scripts
   delete packageJson.prettier
   delete packageJson.jest
@@ -40,8 +41,15 @@ const copyPackageJson = () => {
   )
 }
 
+const buildTypeScript = () => {
+  execSync('npx tsc -b', {
+    cwd: packagePath,
+    stdio: 'inherit',
+  })
+}
+
 const copyFiles = () => {
-  cpSync(join(packagePath, 'src'), join(root, 'dist', 'src'), {
+  cpSync(join(packagePath, 'dist'), join(root, 'dist'), {
     recursive: true,
     force: true,
   })
@@ -53,6 +61,7 @@ const copyFiles = () => {
 
 const main = () => {
   createDist()
+  buildTypeScript()
   copyPackageJson()
   copyFiles()
 }

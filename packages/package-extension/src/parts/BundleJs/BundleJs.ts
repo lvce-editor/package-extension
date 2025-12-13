@@ -14,10 +14,6 @@ export const bundleJs = async (
 
   const workerOutput = await rollup({
     input,
-    preserveEntrySignatures: 'strict',
-    treeshake: {
-      propertyReadSideEffects: false,
-    },
     plugins: [
       babel({
         babelHelpers: 'bundled',
@@ -28,20 +24,24 @@ export const bundleJs = async (
       commonJs(),
       json(),
     ],
+    preserveEntrySignatures: 'strict',
+    treeshake: {
+      propertyReadSideEffects: false,
+    },
   })
 
   await workerOutput.write({
     file: outFile,
     format: 'es',
-    sourcemap: sourceMap,
-    sourcemapExcludeSources: true,
-    inlineDynamicImports: true,
     freeze: false,
-    minifyInternalExports: false,
     generatedCode: {
       constBindings: true,
       objectShorthand: true,
     },
     hoistTransitiveImports: false,
+    inlineDynamicImports: true,
+    minifyInternalExports: false,
+    sourcemap: sourceMap,
+    sourcemapExcludeSources: true,
   })
 }

@@ -1,10 +1,10 @@
+import { VError } from '@lvce-editor/verror'
 import { cp } from 'node:fs/promises'
 import { join } from 'node:path'
-import { VError } from '@lvce-editor/verror'
 
 export const copyFiles = async ({
-  root,
   files,
+  root,
   outDir = join(root, 'dist'),
 }: {
   root: string

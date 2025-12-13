@@ -1,7 +1,7 @@
 import { execa } from 'execa'
 
 const getGitTagFromGit = async (): Promise<string> => {
-  const { stdout, stderr, exitCode } = await execa(
+  const { exitCode, stderr, stdout } = await execa(
     'git',
     ['describe', '--exact-match', '--tags'],
     {
@@ -25,7 +25,7 @@ const getGitTagFromGit = async (): Promise<string> => {
 
 export const getVersion = async (): Promise<string> => {
   const { env } = process
-  const { RG_VERSION, GIT_TAG } = env
+  const { GIT_TAG, RG_VERSION } = env
   if (RG_VERSION) {
     if (RG_VERSION.startsWith('v')) {
       return RG_VERSION.slice(1)

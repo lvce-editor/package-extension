@@ -2,17 +2,17 @@ import { cp, readdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 export const addPlaygroundFiles = async ({
-  root,
   commitHash,
   filesPath,
+  root,
 }: {
   root: string
   commitHash: string
   filesPath: string
 }) => {
   await rm(join(root, 'dist', commitHash, 'playground'), {
-    recursive: true,
     force: true,
+    recursive: true,
   })
   await cp(filesPath, join(root, 'dist', commitHash, 'playground'), {
     recursive: true,
