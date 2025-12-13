@@ -2,6 +2,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import * as CopyFiles from '../src/parts/CopyFiles/CopyFiles.js'
+import { test, expect } from '@jest/globals'
 
 const getTmpDir = () => {
   return mkdtemp(join(tmpdir(), 'foo-'))

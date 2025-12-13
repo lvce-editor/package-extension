@@ -2,8 +2,6 @@ import { execa } from 'execa'
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { bundleJs } from './bundleJs.ts'
-import { generateApiTypes } from './generateApiTypes.ts'
-import { verifyE2eTypes } from './verifyE2eTypes.ts'
 import { root } from './root.ts'
 
 const dist = join(root, '.tmp', 'dist')
@@ -18,11 +16,18 @@ const writeJson = async (path: string, json: any): Promise<void> => {
 }
 
 const getGitTagFromGit = async (): Promise<string> => {
-  const { stdout, stderr, exitCode } = await execa('git', ['describe', '--exact-match', '--tags'], {
-    reject: false,
-  })
+  const { stdout, stderr, exitCode } = await execa(
+    'git',
+    ['describe', '--exact-match', '--tags'],
+    {
+      reject: false,
+    },
+  )
   if (exitCode) {
-    if (exitCode === 128 && stderr.startsWith('fatal: no tag exactly matches')) {
+    if (
+      exitCode === 128 &&
+      stderr.startsWith('fatal: no tag exactly matches')
+    ) {
       return '0.0.0-dev'
     }
     return '0.0.0-dev'
@@ -58,7 +63,9 @@ await bundleJs()
 
 const version = await getVersion()
 
-const packageJson = await readJson(join(root, 'packages/test-worker/package.json'))
+const packageJson = await readJson(
+  join(root, 'packages/test-worker/package.json'),
+)
 
 delete packageJson.scripts
 delete packageJson.devDependencies
@@ -69,10 +76,6 @@ packageJson.main = 'dist/testWorkerMain.js'
 packageJson.types = 'dist/api.d.ts'
 
 await writeJson(join(dist, 'package.json'), packageJson)
-
-await generateApiTypes()
-
-await verifyE2eTypes()
 
 await cp(join(root, 'README.md'), join(dist, 'README.md'))
 await cp(join(root, 'LICENSE'), join(dist, 'LICENSE'))

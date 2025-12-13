@@ -14,7 +14,7 @@ export const compress = async (inDir, outFile) => {
   await pipeline(
     tar.pack(inDir),
     createBrotliCompress(),
-    createWriteStream(outFile)
+    createWriteStream(outFile),
   )
 }
 
@@ -35,6 +35,6 @@ export const compressFasterButWithLowerCompression = async (inDir, outFile) => {
         [constants.BROTLI_PARAM_QUALITY]: constants.BROTLI_MIN_QUALITY,
       },
     }),
-    createWriteStream(outFile)
+    createWriteStream(outFile),
   )
 }
