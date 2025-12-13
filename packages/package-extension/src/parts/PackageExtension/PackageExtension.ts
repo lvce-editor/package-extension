@@ -7,16 +7,18 @@ export const packageExtension = async ({
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
-  writeVersionFromGitTag = true,
+  writeVersionFromGitTag = false,
+  env = process.env,
 }: Readonly<{
   highestCompression?: boolean
   inDir?: string
   outFile?: string
   writeVersionFromGitTag?: boolean
+  env?: NodeJS.ProcessEnv
 }> = {}): Promise<void> => {
   if (writeVersionFromGitTag) {
     const extensionJsonPath = join(inDir, 'extension.json')
-    const version = await getVersion()
+    const version = await getVersion(env)
     const extensionJsonContent = await readFile(extensionJsonPath, 'utf8')
     const extensionJson = JSON.parse(extensionJsonContent)
     const newExtensionJson = { ...extensionJson, version }
