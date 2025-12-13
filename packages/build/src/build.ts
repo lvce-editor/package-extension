@@ -60,7 +60,6 @@ const createDist = async (): Promise<void> => {
   await mkdir(dist, { recursive: true })
 }
 
-<<<<<<< HEAD
 const buildTypeScript = async (): Promise<void> => {
   await execa('npx', ['tsc'], {
     cwd: packagePath,
@@ -78,9 +77,6 @@ const copyFiles = async (): Promise<void> => {
     force: true,
   })
 }
-=======
-const version = await getVersion()
->>>>>>> origin/main
 
 const copyPackageJson = async (): Promise<void> => {
   const packageJson = await readJson(join(packagePath, 'package.json'))
