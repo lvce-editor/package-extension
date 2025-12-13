@@ -3,5 +3,6 @@ export interface PackageExtensionOptions {
   inDir?: string
   outFile?: string
   writeVersionFromGitTag?: boolean
+  env?: NodeJS.ProcessEnv
 }
 

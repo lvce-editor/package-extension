@@ -1,16 +1,9 @@
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import type { PackageExtensionOptions } from './PackageExtensionOptions.ts'
 
 export const getPackageExtension = async (): Promise<
-  (
-    options?: Readonly<{
-      highestCompression?: boolean
-      inDir?: string
-      outFile?: string
-      writeVersionFromGitTag?: boolean
-      env?: NodeJS.ProcessEnv
-    }>,
-  ) => Promise<void>
+  (options?: Readonly<PackageExtensionOptions>) => Promise<void>
 > => {
   const packageExtensionPath = join(
     import.meta.dirname,
