@@ -1,5 +1,6 @@
 import { execSync } from 'node:child_process'
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { readdir } from 'node:fs/promises'
 import path, { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -48,7 +49,22 @@ const buildTypeScript = () => {
   })
 }
 
-const copyFiles = () => {
+const cleanupTsBuildInfo = async () => {
+  const distPath = join(packagePath, 'dist')
+  try {
+    const files = await readdir(distPath)
+    for (const file of files) {
+      if (file.endsWith('.tsbuildinfo')) {
+        rmSync(join(distPath, file), { force: true })
+      }
+    }
+  } catch {
+    // dist directory might not exist, ignore
+  }
+}
+
+const copyFiles = async () => {
+  await cleanupTsBuildInfo()
   cpSync(join(packagePath, 'dist', 'src'), join(root, 'dist', 'src'), {
     recursive: true,
     force: true,
@@ -59,10 +75,10 @@ const copyFiles = () => {
   })
 }
 
-const main = () => {
+const main = async () => {
   createDist()
   buildTypeScript()
-  copyFiles()
+  await copyFiles()
   copyPackageJson()
 }
 
