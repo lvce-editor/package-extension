@@ -30,5 +30,8 @@
     "lerna": "^8.2.4",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

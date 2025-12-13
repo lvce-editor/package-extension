@@ -1,9 +1,10 @@
 import { execa } from 'execa'
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { root } from './root.ts'
 
-const dist = join(root, '.tmp', 'dist')
+const dist = join(root, 'dist')
+const packagePath = join(root, 'packages', 'package-extension')
 
 const readJson = async (path: string): Promise<any> => {
   const content = await readFile(path, 'utf8')
@@ -55,24 +56,45 @@ const getVersion = async (): Promise<string> => {
   return getGitTagFromGit()
 }
 
-await rm(dist, { recursive: true, force: true })
-await mkdir(dist, { recursive: true })
+const createDist = async (): Promise<void> => {
+  await mkdir(dist, { recursive: true })
+}
 
-const version = await getVersion()
+const buildTypeScript = async (): Promise<void> => {
+  await execa('npx', ['tsc'], {
+    cwd: packagePath,
+    stdio: 'inherit',
+  })
+}
 
-const packageJson = await readJson(
-  join(root, 'packages/test-worker/package.json'),
-)
+const copyFiles = async (): Promise<void> => {
+  await cp(join(packagePath, 'dist', 'src'), join(dist, 'src'), {
+    recursive: true,
+    force: true,
+  })
+  await cp(join(root, 'README.md'), join(dist, 'README.md'), {
+    recursive: true,
+    force: true,
+  })
+}
 
-delete packageJson.scripts
-delete packageJson.devDependencies
-delete packageJson.prettier
-delete packageJson.jest
-packageJson.version = version
-packageJson.main = 'dist/testWorkerMain.js'
-packageJson.types = 'dist/api.d.ts'
+const copyPackageJson = async (): Promise<void> => {
+  const packageJson = await readJson(join(packagePath, 'package.json'))
+  const version = await getVersion()
+  packageJson.version = version
+  packageJson.main = 'src/main.js'
+  delete packageJson.scripts
+  delete packageJson.prettier
+  delete packageJson.jest
 
-await writeJson(join(dist, 'package.json'), packageJson)
+  await writeJson(join(dist, 'package.json'), packageJson)
+}
 
-await cp(join(root, 'README.md'), join(dist, 'README.md'))
-await cp(join(root, 'LICENSE'), join(dist, 'LICENSE'))
+const main = async (): Promise<void> => {
+  await createDist()
+  await buildTypeScript()
+  await copyFiles()
+  await copyPackageJson()
+}
+
+main()

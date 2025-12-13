@@ -1,0 +1,5 @@
+export * from '../BundleJs/BundleJs.ts'
+export * from '../CopyFiles/CopyFiles.ts'
+export * from '../GetVersion/GetVersion.ts'
+export * from '../PackageExtension/PackageExtension.ts'
+export * from '../Replace/Replace.ts'
