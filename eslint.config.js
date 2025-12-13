@@ -9,6 +9,7 @@ export default [
     rules: {
       'github-actions/permissions': 'off',
       'n/no-unsupported-features/node-builtins': 'off',
+      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     },
   },
 ]

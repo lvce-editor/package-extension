@@ -1,22 +1,19 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import type { PackageExtensionOptions } from '../../PackageExtensionOptions.ts'
 import * as Compress from '../Compress/Compress.ts'
 import { getVersion } from '../GetVersion/GetVersion.ts'
 
 export const packageExtension = async ({
+  env = process.env,
   highestCompression = false,
   inDir = process.cwd(),
   outFile = join(inDir, 'extension.tar.br'),
-  writeVersionFromGitTag = true,
-}: Readonly<{
-  highestCompression?: boolean
-  inDir?: string
-  outFile?: string
-  writeVersionFromGitTag?: boolean
-}> = {}): Promise<void> => {
+  writeVersionFromGitTag = false,
+}: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
   if (writeVersionFromGitTag) {
     const extensionJsonPath = join(inDir, 'extension.json')
-    const version = await getVersion()
+    const version = await getVersion(env)
     const extensionJsonContent = await readFile(extensionJsonPath, 'utf8')
     const extensionJson = JSON.parse(extensionJsonContent)
     const newExtensionJson = { ...extensionJson, version }
