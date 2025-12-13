@@ -43,28 +43,13 @@ const copyPackageJson = () => {
 }
 
 const buildTypeScript = () => {
-  execSync('npx tsc -b tsconfig.build.json', {
+  execSync('npx tsc -b', {
     cwd: packagePath,
     stdio: 'inherit',
   })
 }
 
-const cleanupTsBuildInfo = async () => {
-  const distPath = join(packagePath, 'dist')
-  try {
-    const files = await readdir(distPath)
-    for (const file of files) {
-      if (file.endsWith('.tsbuildinfo')) {
-        rmSync(join(distPath, file), { force: true })
-      }
-    }
-  } catch {
-    // dist directory might not exist, ignore
-  }
-}
-
 const copyFiles = async () => {
-  await cleanupTsBuildInfo()
   cpSync(join(packagePath, 'dist', 'src'), join(root, 'dist', 'src'), {
     recursive: true,
     force: true,
