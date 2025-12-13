@@ -30,7 +30,7 @@
       ]
     },
     "testMatch": [
-      "**/test/**"
+      "test/**"
     ],
     "collectCoverage": true,
     "coverageThreshold": {
