@@ -4,4 +4,5 @@ export interface PackageExtensionOptions {
   readonly inDir?: string
   readonly outFile?: string
   readonly writeVersionFromGitTag?: boolean
+  readonly writeLastUpdatedFromGitCommit?: boolean
 }

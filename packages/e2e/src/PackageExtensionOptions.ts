@@ -4,4 +4,5 @@ export interface PackageExtensionOptions {
   inDir?: string
   outFile?: string
   writeVersionFromGitTag?: boolean
+  writeLastUpdatedFromGitCommit?: boolean
 }
