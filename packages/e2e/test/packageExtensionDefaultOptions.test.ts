@@ -1,7 +1,9 @@
 import { test, expect } from '@jest/globals'
 import { readFile, stat, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { extract, getPackageExtension, getTmpDir } from '../src/helpers.ts'
+import { extract } from '../src/extract.ts'
+import { getPackageExtension } from '../src/getPackageExtension.ts'
+import { getTmpDir } from '../src/getTmpDir.ts'
 
 test('packageExtension with default options creates tar.br in inDir', async () => {
   const packageExtension = await getPackageExtension()

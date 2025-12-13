@@ -1,7 +1,9 @@
 import { test, expect } from '@jest/globals'
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { extract, getPackageExtension, getTmpDir } from '../src/helpers.ts'
+import { extract } from '../src/extract.ts'
+import { getPackageExtension } from '../src/getPackageExtension.ts'
+import { getTmpDir } from '../src/getTmpDir.ts'
 
 test('packageExtension creates tar.br file with correct contents', async () => {
   const packageExtension = await getPackageExtension()
@@ -22,7 +24,10 @@ test('packageExtension creates tar.br file with correct contents', async () => {
   )
   await writeFile(join(extensionDir, 'README.md'), '# Test Extension\n')
   await mkdir(join(extensionDir, 'src'), { recursive: true })
-  await writeFile(join(extensionDir, 'src', 'index.js'), 'console.log("test")\n')
+  await writeFile(
+    join(extensionDir, 'src', 'index.js'),
+    'console.log("test")\n',
+  )
 
   await packageExtension({
     inDir: extensionDir,
@@ -46,6 +51,9 @@ test('packageExtension creates tar.br file with correct contents', async () => {
   const extractedReadme = await readFile(join(extractDir, 'README.md'), 'utf8')
   expect(extractedReadme).toBe('# Test Extension\n')
 
-  const extractedIndex = await readFile(join(extractDir, 'src', 'index.js'), 'utf8')
+  const extractedIndex = await readFile(
+    join(extractDir, 'src', 'index.js'),
+    'utf8',
+  )
   expect(extractedIndex).toBe('console.log("test")\n')
 })
