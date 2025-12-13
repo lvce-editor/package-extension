@@ -1,8 +1,7 @@
 export interface PackageExtensionOptions {
-  highestCompression?: boolean
-  inDir?: string
-  outFile?: string
-  writeVersionFromGitTag?: boolean
-  env?: NodeJS.ProcessEnv
+  readonly highestCompression?: boolean
+  readonly inDir?: string
+  readonly outFile?: string
+  readonly writeVersionFromGitTag?: boolean
+  readonly env?: NodeJS.ProcessEnv
 }
-

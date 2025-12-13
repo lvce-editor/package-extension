@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import type { PackageExtensionOptions } from '../../../../e2e/src/PackageExtensionOptions.ts'
 import * as Compress from '../Compress/Compress.ts'
 import { getVersion } from '../GetVersion/GetVersion.ts'
 
@@ -9,13 +10,7 @@ export const packageExtension = async ({
   outFile = join(inDir, 'extension.tar.br'),
   writeVersionFromGitTag = false,
   env = process.env,
-}: Readonly<{
-  highestCompression?: boolean
-  inDir?: string
-  outFile?: string
-  writeVersionFromGitTag?: boolean
-  env?: NodeJS.ProcessEnv
-}> = {}): Promise<void> => {
+}: Readonly<PackageExtensionOptions> = {}): Promise<void> => {
   if (writeVersionFromGitTag) {
     const extensionJsonPath = join(inDir, 'extension.json')
     const version = await getVersion(env)
