@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { PackageExtensionOptions } from '../../../../e2e/src/PackageExtensionOptions.ts'
+import type { PackageExtensionOptions } from '../../PackageExtensionOptions.ts'
 import * as Compress from '../Compress/Compress.ts'
 import { getVersion } from '../GetVersion/GetVersion.ts'
 
