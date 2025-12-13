@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import * as Compress from '../Compress/Compress.js'
+import * as Compress from '../Compress/Compress.ts'
 
 export const packageExtension = async ({
   highestCompression = false,
