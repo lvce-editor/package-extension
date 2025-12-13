@@ -4,10 +4,37 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "measure": "node --experimental-strip-types src/measureMemory.ts",
-    "measure:visible": "node --experimental-strip-types src/measureMemory.ts --no-headless"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "injectGlobals": false,
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "testMatch": [
+      "<rootDir>/test/**"
+    ]
+  },
+  "dependencies": {
+    "tar-fs": "^3.1.1"
   },
   "devDependencies": {
-    "@types/node": "^25.0.1"
+    "@jest/globals": "^30.2.0",
+    "@types/node": "^25.0.1",
+    "@types/tar-fs": "^2.0.4",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6"
   }
 }
