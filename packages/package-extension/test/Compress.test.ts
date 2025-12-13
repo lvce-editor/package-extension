@@ -12,11 +12,7 @@ const getTmpDir = () => {
   return mkdtemp(join(tmpdir(), 'foo-'))
 }
 
-/**
- * @param {string} inFile
- * @param {string} outDir
- */
-export const extract = async (inFile, outDir) => {
+export const extract = async (inFile: string, outDir: string) => {
   await mkdir(outDir, { recursive: true })
   await pipeline(
     createReadStream(inFile),
@@ -47,3 +43,4 @@ test('compressFasterButWithLowerCompression', async () => {
   await extract(`${tmpDir2}/result.tar.br`, tmpDir3)
   expect(await readFile(`${tmpDir3}/abc.txt`, 'utf8')).toBe('abc')
 })
+

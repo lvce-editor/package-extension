@@ -1,4 +1,8 @@
-export const bundleJs = async (input, outFile, sourceMap = true) => {
+export const bundleJs = async (
+  input: string,
+  outFile: string,
+  sourceMap: boolean = true,
+) => {
   const { babel } = await import('@rollup/plugin-babel')
   const { default: pluginTypeScript } = await import('@babel/preset-typescript')
   const { rollup } = await import('rollup')
@@ -39,3 +43,4 @@ export const bundleJs = async (input, outFile, sourceMap = true) => {
     hoistTransitiveImports: false,
   })
 }
+

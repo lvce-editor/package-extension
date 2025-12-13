@@ -6,6 +6,10 @@ export const copyFiles = async ({
   root,
   files,
   outDir = join(root, 'dist'),
+}: {
+  root: string
+  files: string[]
+  outDir?: string
 }) => {
   try {
     for (const file of files) {
@@ -17,3 +21,4 @@ export const copyFiles = async ({
     throw new VError(error, 'Failed to copy files')
   }
 }
+

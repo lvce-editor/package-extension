@@ -1,6 +1,6 @@
 import { execa } from 'execa'
 
-const getGitTagFromGit = async () => {
+const getGitTagFromGit = async (): Promise<string> => {
   const { stdout, stderr, exitCode } = await execa(
     'git',
     ['describe', '--exact-match', '--tags'],
@@ -23,7 +23,7 @@ const getGitTagFromGit = async () => {
   return stdout
 }
 
-export const getVersion = async () => {
+export const getVersion = async (): Promise<string> => {
   const { env } = process
   const { RG_VERSION, GIT_TAG } = env
   if (RG_VERSION) {
@@ -40,3 +40,4 @@ export const getVersion = async () => {
   }
   return getGitTagFromGit()
 }
+
