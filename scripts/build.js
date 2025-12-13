@@ -43,7 +43,7 @@ const copyPackageJson = () => {
 }
 
 const buildTypeScript = () => {
-  execSync('npx tsc -b', {
+  execSync('npx tsc', {
     cwd: packagePath,
     stdio: 'inherit',
   })
