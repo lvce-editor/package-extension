@@ -23,8 +23,9 @@ const getGitTagFromGit = async (): Promise<string> => {
   return stdout
 }
 
-export const getVersion = async (): Promise<string> => {
-  const { env } = process
+export const getVersion = async (
+  env: NodeJS.ProcessEnv = process.env,
+): Promise<string> => {
   const { GIT_TAG, RG_VERSION } = env
   if (RG_VERSION) {
     if (RG_VERSION.startsWith('v')) {
