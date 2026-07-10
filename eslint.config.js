@@ -7,6 +7,8 @@ export default [
   ...actions,
   {
     rules: {
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
       'github-actions/permissions': 'off',
       'n/no-unsupported-features/node-builtins': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
