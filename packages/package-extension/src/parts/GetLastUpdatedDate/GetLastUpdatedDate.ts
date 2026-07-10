@@ -1,9 +1,17 @@
 import { execa } from 'execa'
 
-const getGitCommitDateFromGit = async (cwd: string): Promise<number | null> => {
+const toIsoString = (timestamp: number): string | null => {
+  const date = new Date(timestamp)
+  if (Number.isNaN(date.getTime())) {
+    return null
+  }
+  return date.toISOString()
+}
+
+const getGitCommitDateFromGit = async (cwd: string): Promise<string | null> => {
   const { exitCode, stdout } = await execa(
     'git',
-    ['log', '-1', '--format=%cd', '--date=format:%Y%m%d%H%M%S'],
+    ['log', '-1', '--format=%cI'],
     {
       cwd,
       reject: false,
@@ -15,27 +23,18 @@ const getGitCommitDateFromGit = async (cwd: string): Promise<number | null> => {
   if (!stdout || stdout.trim() === '') {
     return null
   }
-  const dateString = stdout.trim()
-  // Parse YYYYMMDDHHMMSS format
-  const year = Number.parseInt(dateString.slice(0, 4), 10)
-  const month = Number.parseInt(dateString.slice(4, 6), 10) - 1 // Month is 0-indexed
-  const day = Number.parseInt(dateString.slice(6, 8), 10)
-  const hour = Number.parseInt(dateString.slice(8, 10), 10)
-  const minute = Number.parseInt(dateString.slice(10, 12), 10)
-  const second = Number.parseInt(dateString.slice(12, 14), 10)
-  const date = new Date(year, month, day, hour, minute, second)
-  return Math.floor(date.getTime() / 1000) // Convert to unix timestamp (seconds)
+  return toIsoString(Date.parse(stdout.trim()))
 }
 
 export const getLastUpdatedDate = async (
   env: NodeJS.ProcessEnv = process.env,
   cwd: string = process.cwd(),
-): Promise<number | null> => {
+): Promise<string | null> => {
   const { GIT_COMMIT_DATE } = env
   if (GIT_COMMIT_DATE) {
-    const timestamp = Number.parseInt(GIT_COMMIT_DATE, 10)
-    if (!Number.isNaN(timestamp)) {
-      return timestamp
+    const timestampInSeconds = Number(GIT_COMMIT_DATE)
+    if (Number.isFinite(timestampInSeconds)) {
+      return toIsoString(timestampInSeconds * 1000)
     }
   }
   return getGitCommitDateFromGit(cwd)

@@ -28,7 +28,7 @@ test('packageExtension adds lastUpdated from git commit to extension.json', asyn
     cwd: extensionDir,
   })
   await execa('git', ['add', 'extension.json'], { cwd: extensionDir })
-  const commitDate = '2024-01-15T10:30:00'
+  const commitDate = '2024-01-15T10:30:00+05:30'
   await execa('git', ['commit', '-m', 'Initial commit'], {
     cwd: extensionDir,
     env: {
@@ -49,10 +49,6 @@ test('packageExtension adds lastUpdated from git commit to extension.json', asyn
   )
   expect(updatedExtensionJson.name).toBe('test-extension')
   expect(updatedExtensionJson.description).toBe('Test extension')
-  expect(typeof updatedExtensionJson.lastUpdated).toBe('number')
-  expect(updatedExtensionJson.lastUpdated).toBeGreaterThan(0)
-  const expectedTimestamp = Math.floor(
-    new Date('2024-01-15T10:30:00').getTime() / 1000,
-  )
-  expect(updatedExtensionJson.lastUpdated).toBe(expectedTimestamp)
+  expect(typeof updatedExtensionJson.lastUpdated).toBe('string')
+  expect(updatedExtensionJson.lastUpdated).toBe('2024-01-15T05:00:00.000Z')
 })
