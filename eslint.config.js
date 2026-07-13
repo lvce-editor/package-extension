@@ -7,9 +7,19 @@ export default [
   ...actions,
   {
     rules: {
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
       'github-actions/permissions': 'off',
       'n/no-unsupported-features/node-builtins': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+      'unicorn/no-unsafe-string-replacement': 'off',
+    },
+  },
+  {
+    files: ['**/*.test.ts'],
+    rules: {
+      'n/no-missing-import': 'off',
+      'sonarjs/prefer-specific-assertions': 'off',
     },
   },
 ]
