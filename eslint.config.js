@@ -22,4 +22,10 @@ export default [
       'sonarjs/prefer-specific-assertions': 'off',
     },
   },
+  {
+    files: ['packages/e2e/**/*.ts'],
+    rules: {
+      'e2e/no-imports': 'off',
+    },
+  },
 ]
