@@ -1,10 +1,10 @@
+import { defineConfig } from 'eslint/config'
 import * as config from '@lvce-editor/eslint-config'
-import actions from '@lvce-editor/eslint-plugin-github-actions'
 
-export default [
+export default defineConfig([
   ...config.default,
   ...config.recommendedNode,
-  ...actions,
+  ...config.recommendedActions,
   {
     rules: {
       '@typescript-eslint/await-thenable': 'off',
@@ -28,4 +28,4 @@ export default [
       'e2e/no-imports': 'off',
     },
   },
-]
+])
